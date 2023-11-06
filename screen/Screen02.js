@@ -1,67 +1,93 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput} from 'react-native'
-import React from 'react'
-const Screen02 = ({navigation}) => {
-    var [dt, setDt] = useState({});
-  const [checkedItems, setCheckedItems] = useState({});
-  const [flag, setFlag] = useState(false);
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View,Image,TextInput,TouchableOpacity} from 'react-native';
 
-  const handleUpdateData = () => {
-    fetch("https://653f2fdd9e8bd3be29e00ea4.mockapi.io/todos/1")
-      .then((response) => response.json())
-      .then((json) => {
-        setDt(json);
-      });
-  };
+const Screen02 = (navigation) => {
 
-  console.log(dt);
-  const handleCheck = (name) => {
-    setDt({
-      ...dt,
-      todoList: dt.todoList.map((item) =>
-        item.name === name ? { ...item, check: !item.check } : item
-      ),
-    });
-    setFlag(!flag);
-  };
-  useEffect(() => {
-    handleUpdateData();
-    fetch(`https://653f2fdd9e8bd3be29e00ea4.mockapi.io/todos/1`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        todoList: dt.todoList,
-      }),
-    });
-  }, [flag]);
+    const [todos, setTodos] = useState();
+
+    const getTodoData = () => {
+        fetch('https://6544365a5a0b4b04436c25bb.mockapi.io/learn')
+            .then(response => response.json())
+            .then((json) => {
+                setTodos(json);
+                console.log(json)
+            })
+    }
+
+    useEffect(() => {
+        getTodoData();
+    }, [])
+
     return (
-        <View style={styles.constain}>
+        <View style={styles.container}>
             <View style={styles.view1}>
-                <Image source={require('../assets/Frame3.png')} style={{width:20,height:20}}></Image>
-                <TextInput placeholder='  Search' style={{fontSize:20}}></TextInput>
+                <Image source={require('../assets/Frame3.png')} style={{width:25,height:25}}></Image>
+                <TextInput placeholder='Search' style={{fontSize:15}}></TextInput>
             </View>
-            
+          <View style={styles.view2}>
+            <ScrollView>
+                   
+                    {!!todos?.length && todos?.map((todo) => {
+                        return (
+                            <View style={styles.todo}>
+                                <Image source={require('../assets/Frame (1).png')} style={{width:25,height:25,right:50}}></Image>
+                                <Text>{todo?.name}</Text>
+                                <Image source={require('../assets/Frame (2).png')} style={{width:25,height:25,left:50}}></Image>
+                            </View>
+                        )
+                    })}
+                </ScrollView>
+          </View>
+          <View style={styles.view3}>
+            <TouchableOpacity>
+                <Text style={{fontSize:50}}>+</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        
     )
 }
+
 export default Screen02
+
 const styles = StyleSheet.create({
-    constain: {
-        backgroundColor: "#fff",
-        width: "100%",
-        height:'100%',
-        overflow: "hidden",
+    container: {
+        paddingHorizontal: 16,
     },
     view1:{
-        backgroundColor: "#fff",
-        width: "80%",
-        left:40,
-        overflow: "hidden",
-        alignItems: 'center',
         flexDirection:'row',
-        borderWidth:1,
+        alignItems:'center',
+        width:'80%',
+        height:50,
+        top:80,
+        left:20,
         borderColor:'gray',
+        borderWidth:1,
+    },
+    view2:{
+        width:'100%',
+        height:500,
+        top:50,
+    },
+    view3:{
+        width:90,
+        height:90,
+        top:50,
+        left:120,
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'skyblue',
+        borderRadius:50,
+    },
+    todo: {
+        top:50,
+        flexDirection: 'row',
+        width: '100%',
+        marginVertical: 10,
+        paddingHorizontal: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 50,
+        borderRadius: 20,
+        backgroundColor: 'lightgray'
     }
 })
