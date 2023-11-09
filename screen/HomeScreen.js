@@ -16,7 +16,6 @@ const HomeScreen = ({navigation}) => {
             <View style={styles.view3}> 
                 <TouchableOpacity  onPress={() => navigation.navigate("Screen02")}>
                     <Text style={{color:'white'}}>GET STARTED </Text>
-
                 </TouchableOpacity>
             </View>
         </View>
