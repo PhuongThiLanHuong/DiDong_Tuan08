@@ -7,6 +7,7 @@ import HomeScreen from './screen/HomeScreen'
 import Screen02 from './screen/Screen02'
 import Screen03 from './screen/Screen03'
 import Donut from './screen/Donut'
+import DonutDetail from './screen/DonutDetail'
 
 const Stack = createStackNavigator()
 
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Screen name="Screen02" component={Screen02} options={{headerShown: false}}/>
         <Stack.Screen name="Screen03" component={Screen03} options={{headerShown: false}}/>
         <Stack.Screen name="Donut" component={Donut} options={{headerShown: false}}/>
+        <Stack.Screen name="DonutDetail" component={DonutDetail} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -52,14 +52,14 @@ return (
         <View style={styles.view2}>
                     {!!todos?.length && todos?.map((todo) => {
                         return (
-                           <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
+                           <TouchableOpacity onPress={() => navigation.navigate("DonutDetail")}>
                                 <View style={styles.todo}>
                                     <Image source={{uri: todo.image}} style={{width:80,height:80}}></Image>
                                     <View style={{flexDirection:'column',left:10}}>
                                         <Text style={{fontSize:25,fontWeight:700}}>{todo?.type}</Text>
                                             <View style={{flexDirection:'row'}}>
                                                 <Text style={{fontSize:25,fontWeight:700}}>{todo?.price}</Text>
-                                                <Text style={{fontSize:30,fontWeight:700,backgroundColor:'orange',left:150,color:'white'}}>+</Text>
+                                                <Text style={{fontSize:30,fontWeight:700,backgroundColor:'orange',left:0,color:'white'}}>+</Text>
                                             </View>
                                     </View>
                                 </View>
