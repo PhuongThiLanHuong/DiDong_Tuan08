@@ -52,7 +52,7 @@ return (
         <View style={styles.view2}>
                     {!!todos?.length && todos?.map((todo) => {
                         return (
-                           <TouchableOpacity onPress={() => navigation.navigate("DonutDetail")}>
+                           <TouchableOpacity onPress={() => navigation.navigate("DonutDetail",{todo})}>
                                 <View style={styles.todo}>
                                     <Image source={{uri: todo.image}} style={{width:80,height:80}}></Image>
                                     <View style={{flexDirection:'column',left:10}}>
